@@ -1,0 +1,128 @@
+\newgeometry{margin=1in, top=2.5in}
+
+\begin{titlepage}
+% front page
+
+\begin{center}
+
+	{\large
+		\doctype\relax
+	}
+	
+	\vspace{.5cm}
+	
+	{\huge \bfseries \sffamily
+		\doctitle\relax
+		\par
+	}
+	
+	\vspace{1.5cm}
+	
+	\ifx\doclanguage\english
+		submitted by
+	\fi
+	\ifx\doclanguage\german
+		eingereicht von
+	\fi
+	\ifx\doclanguage\ngerman
+		eingereicht von
+	\fi
+	
+	\vspace{.5cm}
+	
+	\textbf{\authorname} \\
+	\ifx\doclanguage\english
+		born
+	\fi
+	\ifx\doclanguage\german
+		geboren am
+	\fi
+	\ifx\doclanguage\ngerman
+		geboren am
+	\fi
+	\authorbirthday{} in \authorbirthplace
+
+	
+	\vspace{1.5cm}
+	
+	{\Large Technische Universität Dresden}
+	
+	\vspace{.5cm}
+	
+	\ifx\doclanguage\english
+		Faculty of Computer Science \\
+		Institute of Applied Computer Science \\
+		Chair of Human-Computer Interaction
+
+	\fi
+	\ifx\doclanguage\german
+		Fakultät Informatik \\
+		Institut für Angewandte Informatik \\
+		Lehrstuhl Mensch-Computer-Interaktion
+
+	\fi
+	\ifx\doclanguage\ngerman
+		Fakultät Informatik \\
+		Institut für Angewandte Informatik \\
+		Lehrstuhl Mensch-Computer-Interaktion
+
+	\fi
+	
+	\vspace{1.0cm}
+	
+	\includegraphics[scale=.75]{includes/figures/tu_logo}
+	
+	\vspace{1.5cm}
+\end{center}
+
+	\noindent
+	\ifx\doclanguage\english
+		Supervisors: \\
+	\fi
+	\ifx\doclanguage\german
+		Betreuer: \\
+	\fi
+	\ifx\doclanguage\ngerman
+		Betreuer: \\
+	\fi
+	\supervisors
+	
+	\vspace{.5cm}
+	
+	\noindent
+	\ifx\doclanguage\english
+		Professor: \\
+	\fi
+	\ifx\doclanguage\german
+		Hochschullehrer: \\
+	\fi
+	\ifx\doclanguage\ngerman
+		Hochschullehrer: \\
+	\fi
+	\professor
+	
+	\vspace{1.5cm}
+	
+	\noindent
+	\ifx\doclanguage\english
+		Submitted
+	\fi
+	\ifx\doclanguage\german
+		Eingereicht am
+	\fi
+	\ifx\doclanguage\ngerman
+		Eingereicht am
+	\fi
+	\docdate
+
+
+% Add PDF Meta Data
+\hypersetup{
+		pdftitle={\doctitle},
+		pdfauthor={\authorname},
+		pdfsubject={\doctype}
+	}
+
+\end{titlepage}
+
+\restoregeometry

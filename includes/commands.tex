@@ -1,0 +1,249 @@
+% language constants
+\def\english{english}
+\def\german{german}
+\def\ngerman{ngerman}
+\def\true{true}
+\def\false{false}
+
+% DOCUMENT LAYOUT SETUP (Encoding, Language, Fonts, Page Setup) 
+% 
+\usepackage[utf8]{inputenc}	% Encoding
+
+\usepackage{fontspec} % New font management (requires XeLaTeX)
+\usepackage{lmodern} % Use (improved) font Latin Modern
+% Custom Fonts
+\setmainfont{Lora}[
+	Path 			= includes/fonts/Lora/ ,
+	Extension		= .ttf ,
+	UprightFont		= *-Regular ,
+	BoldFont		= *-Bold ,
+	ItalicFont		= *-Italic ,
+	BoldItalicFont	= *-BoldItalic ,
+	Scale			= .95
+	 ]
+\setsansfont{Lato}[
+	Path 			= includes/fonts/Lato/ ,
+	Extension		= .ttf ,
+	UprightFont		= *-Regular ,
+	BoldFont		= *-Bold ,
+	ItalicFont		= *-Italic ,
+	BoldItalicFont	= *-BoldItalic ]
+\setmonofont{FiraCode}[
+	Path 			= includes/fonts/FiraCode/ ,
+	Extension		= .otf ,
+	UprightFont		= *-Regular ,
+	BoldFont		= *-Bold ,
+	Scale			= MatchLowercase ]	
+
+\ifx\doclanguage\english
+		\usepackage[english]{babel}
+\fi
+\ifx\doclanguage\german
+		\usepackage[german]{babel}
+\fi
+\ifx\doclanguage\ngerman
+		\usepackage[ngerman]{babel}
+\fi
+
+\usepackage[left=30mm,right=20mm,top=30mm,bottom=40mm]{geometry} % Page setup
+
+\usepackage[
+	pdftoolbar=true,
+	bookmarksopen,
+	bookmarksnumbered=false,
+	bookmarksopenlevel=1,
+	pdfdisplaydoctitle,	
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+]{hyperref} % Linking within PDF
+
+% FORMAT CONTENT
+\usepackage{graphicx} % Graphics options like scale
+
+\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption} % Nicer caption layouts
+
+\usepackage{enumitem} % Customise enumeration formats
+	% USAGE:
+	%	\begin{enumerate}[label=\lbrack\arabic*\rbrack,start=1]
+	%		\item Bla --> (creates [1] Bla)
+	%	\end{enumerate}
+	%
+	%	\begin{enumerate}[label=\lbrack\arabic*\rbrack,resume]
+	%		\item Bla --> (creates [2] Bla)
+	%	\end{enumerate}
+	
+\usepackage{multicol} % Introduce multi column content
+	% USAGE:
+	% \begin{multicols}{<number>}
+	% 	<multicolumn text>	% \end{multicols}
+
+\usepackage{url} % Insert clickable URLs
+	% USAGE:
+	% \url{http://www.google.com}
+
+% PROVIDE CONTENT
+
+\usepackage[printonlyused,withpage]{acronym} % Manage abbreviations
+	% USAGE:
+	% Create abbreviations in acronyms.tex this way...
+	% 	\acro{POSF}{Partly Open Software Family}
+	% 	\acroplural{POSF}[POSFs]{Partly Open Software Families}
+	% Call abbreviations anywhere in the document this way...
+	% 	\ac{abbr.}         % default:	full at first call, short (abbr.) else
+	% 	\acs{abbr.}        % short: 	abbr.
+	% 	\acf{abbr.}        % full: 	abbreviation (abbr.)
+	% 	\acl{abbr.}        % long: 	abbreviation
+	% for plural forms, add a -p: \acp, \acsp, \acfp, \aclp
+	
+\usepackage{blindtext} % Allow blind text
+	% USAGE:
+	% \blindtext[4] typesets blind text with 4 repetitions
+	% \Blindtext[2][3] typesets blind text with 2 paragraphs and 3 rep.
+
+%======================================================================== BIBLIOGRAPHY
+
+\usepackage[
+	backend=biber,
+	style=alphabetic,
+	maxbibnames=50,
+	isbn=false,
+	sortlocale=en_UK,
+	backref=true,
+	backrefstyle=two+
+]{biblatex} % User Biber and BibLaTeX
+
+\bibliography{includes/bibliography}
+
+%======================================================================== THEOREMS
+
+\usepackage{mdframed} % Allows framed and coloured environments
+\usepackage{thmtools} % Allows Theorem definitions and lists
+
+\mdfdefinestyle{guidelinestyle}{
+%  linecolor=black,					% STYLE 1 (boxed with grey title)
+%  linewidth=.8pt,
+%  frametitlerule=true,
+%  frametitlefont=\sffamily\bfseries,
+%  frametitlebackgroundcolor=codebackground,
+%  innertopmargin=\topskip,
+  frametitlealignment=\center,		% STYLE 2 (lines top, separator, bottom)
+  frametitlefont=\normalfont,
+  frametitlerule=true,
+  rightline=false,
+  leftline=false,
+  linewidth=.8pt,
+  frametitlerulewidth=.4pt
+}
+
+\makeatletter
+\define@key{thmdef}{mdthm}[{}]{%
+\thmt@trytwice{\def\thmt@theoremdefiner{\mdtheorem[#1]}}{}}
+\makeatother
+
+\declaretheorem[
+	mdthm={style=guidelinestyle},
+	%numberwithin=chapter
+]{definition}% <environment name>
+\makeatletter
+\def\ll@definition{% <environment name>
+  \protect\numberline{\csname the\thmt@envname\endcsname}
+  \ifx\@empty\thmt@shortoptarg
+    \thmt@thmname
+  \else
+    \thmt@shortoptarg
+  \fi}
+\makeatother
+	% USAGE:
+	%\begin{definition}[<term>]
+	%\label{def:<term>}
+	%	<definition text>
+	%\end{definition}
+	
+\declaretheorem[
+	mdthm={style=guidelinestyle},
+	%numberwithin=chapter
+]{formula}% <environment name>
+\makeatletter
+\def\ll@formula{% <environment name>
+  \protect\numberline{\csname the\thmt@envname\endcsname}
+  \ifx\@empty\thmt@shortoptarg
+    \thmt@thmname
+  \else
+    \thmt@shortoptarg
+  \fi}
+\makeatother
+	% USAGE:
+	%\begin{formula}[<term>]
+	%\label{for:<term>}
+	%	<formula text>
+	%\end{formula}
+
+
+%======================================================================== LISTINGS
+
+\usepackage{listings} % add source code inclusion opportunity
+
+\lstset{
+	basicstyle=\footnotesize\ttfamily,
+	commentstyle=\color{tudgreen2}\ttfamily,
+	keywordstyle=\bfseries\color{tudblue2},
+	captionpos=b,
+	language=Java,
+	morekeywords={Set, Group, Feature, FeatureModel, Constraint}, 
+	numbers=left,  
+	numberstyle=\bfseries\ttfamily,
+	stepnumber=1, 
+	numbersep=5pt,
+	tabsize=2,
+	texcl=false,
+	mathescape=true,
+	frame=single,
+	framexleftmargin=12pt,
+	framextopmargin=1pt,
+	framexbottommargin=1pt,
+	framexrightmargin=4pt,
+	backgroundcolor=\color{codebackground},
+	showspaces=false,
+	showstringspaces=false,
+	numberbychapter=true
+}
+	% USAGE:
+	% inline:
+	%	\begin{lstlisting}[caption=<caption>, label=lst:<label>]
+	%		<YOUR CODE HERE>
+	%	\end{lstlisting}
+	% include:
+	%	\lstinputlisting[language=Python]{source_filename.py}
+
+%======================================================================== COLOURS
+
+\usepackage[usenames, dvipsnames, svgnames, table]{xcolor} % Manage colours
+
+\xdefinecolor{tudblue}{HTML}{0B2A51}
+\xdefinecolor{tudblue2}{HTML}{0059A3}
+\xdefinecolor{tudpurple}{HTML}{51297F}
+\xdefinecolor{tudpurple2}{HTML}{811A78}
+\xdefinecolor{tudgreen}{HTML}{007A47}
+\xdefinecolor{tudgreen2}{HTML}{22AD36}
+\xdefinecolor{tudorange}{HTML}{E87B14}
+\xdefinecolor{codebackground}{rgb}{0.96, 0.96, 0.96}
+	% USAGE:
+	% \textcolor{tudblue}
+
+%======================================================================== TODOs
+%-TODO Tag with optional comment
+%(#1: comment) #2: affected region
+\newcommand{\todo}[2][TODO]{\textbf{\textcolor{tudpurple2}{[#1]} \textcolor{tudorange}{#2}}}
+%-ENHANCEMENT Tag
+\newcommand{\enhancement}[1]{\textcolor{tudpurple2}{[Enhancement]} \textcolor{tudblue2}{#1}}
+	% USAGE:
+	% \todo{This is a sandbox todo.}
+	% \todo[Wow]{This as well with own labeling.}
+	% \enhancement{This is an enhancement.}
+
+
+
+

@@ -1,0 +1,144 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MCI Thesis Template
+%% Copyright 2017. David Gollasch.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[
+	11pt, 
+	a4paper, 
+	twoside, 
+	openright, 
+	titlepage=firstiscover, 
+	numbers=noenddot, 
+	BCOR=12mm,
+	headsepline,
+	footsepline,
+	toc=listof,
+	toc=bibliography
+	]{scrbook}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% 1. Configure Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%todo: Configure Document
+
+\def\doclanguage{english} %english, german, ngerman	
+\def\doctitle{Ministry of Silly Walks}
+\def\doctype{Bachelor's Thesis}
+\def\docdate{\today}
+\def\authorname{John Doe}
+\def\authorbirthday{18.04.1990}
+\def\authorbirthplace{Old Gill on South}
+\def\professor{Prof. Dr. rer. nat. habil. Gerhard Weber}
+\def\supervisors{Dr.-Ing. Jane Doe \\ Christoph Smith, M.\,Sc.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% 2. Take a Look into the Predefined Commands
+%%
+%%	- encoding is utf8 and does not require entities for ä/ö/ü/ß
+%%	- generate the document using XeLaTeX instead of pdfLaTeX 
+%%	- and Biber engine instead of BibTeX
+%%
+%%	- BIB-File is located at includes/bibliography.bib
+%%	- abbreviations supported (includes/acronyms.tex)
+%%	- multiple columns supported (multicol)
+%%	- URLs supported (url)
+%%
+%%	- definitions and formulae supported
+%%		USAGE:
+%%		\begin{definition}[<term>]	| \begin{formula}[<term>]
+%%		\label{def:<term>}			| \label{for:<term>}
+%%			<definition text>		| 	 <formula text>
+%%		\end{definition}				| \end{formula}
+%%
+%%	- listings supported (listings)
+%%		USAGE:
+%%		inline:
+%%			\begin{lstlisting}[caption=<caption>, label=lst:<label>]
+%%				<YOUR CODE HERE>
+%%			\end{lstlisting}
+%%		include:
+%%			\lstinputlisting[language=Python]{source_filename.py}
+%%
+%%	- predefined commands for TODOs
+%%		USAGE:
+%%		\todo{This is a sandbox todo.}
+%%		\todo[Wow]{This as well with own labeling.}
+%%		\enhancement{This is an enhancement.}
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%todo: Look into the available commands
+
+\include{includes/commands}
+
+\begin{document}
+\pagenumbering{gobble}
+
+	\include{includes/titlepage}
+	
+	%todo: Include task description here
+	
+	\include{includes/confirmation} %todo: Sign the confirmation
+	
+\cleardoublepage
+\pagenumbering{Roman}
+	
+	%todo: Write an abstract
+	\chapter*{Abstract}
+	\addcontentsline{toc}{chapter}{Abstract}
+	\Blindtext[2][2]
+	
+	\tableofcontents
+
+\cleardoublepage
+\pagenumbering{arabic} 
+
+	%todo: Write you thesis content
+	\chapter{Motivation}
+	\Blindtext[2][2]
+	
+	\chapter{Context and Preliminaries}
+	\Blindtext[2][2]\cite{al-kodmany_sentient_2012}
+	
+	
+\cleardoublepage
+\pagenumbering{roman}
+	
+	\appendix
+	
+	%todo: Add appendices
+	\chapter{Appendix}
+	\Blindtext[2][2]
+	
+	% List of Abbreviations
+	%todo: Include your abbreviations into includes/acronyms.tex
+	\include{includes/acronyms}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE FOLLOWING WILL GENERATE LISTS AUTOMATICALLY
+% DO NOT CHANGE THE CODE BESIDES THE LISTS' ORDER
+	
+	% List of Definitions
+	\renewcommand{\listtheoremname}{List of Definitions}
+	\listoftheorems[ignoreall,show={definition}]
+	% List of Figures
+	\listoffigures
+	% List of Tables
+	\listoftables
+	% List of Listings
+	\renewcommand{\lstlistlistingname}{List of \lstlistingname s}
+	\lstlistoflistings	
+	% List of Formulas
+	\renewcommand{\listtheoremname}{List of Formulas}
+	\listoftheorems[ignoreall,show={formula}]
+	% Bibliography
+	\printbibliography %\printbibliography[heading=bibintoc] if ToC entry desired
+
+\end{document}
